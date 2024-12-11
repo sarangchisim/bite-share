@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9f0;
+            color: #2f4f2f;
+            display: flex;
+            flex-direction: column; /* Flex layout */
+            min-height: 100vh; /* Makes body fill full height of the viewport */
+        }
+
+        /* Header */
+        header {
+            background-color: #3cb371;
+            color: white;
+            padding: 25px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers the content horizontally */
+            width: 100%;
+            position: relative; /* Allows flexibility in positioning */
+            text-align: center;
+        }
+            
+        header h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        /* Sliding Menu */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #2e8b57;
+            overflow-x: hidden;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding-top: 20px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            border-bottom: 1px solid #3cb371;
+        }
+        .menu a:hover {
+            background-color: #3cb371;
+        }
+        .menu-button {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: #2e8b57;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            position: absolute; /* Moves the button independently */
+            left: 35px; /* Adjust the left positioning */
+            top: 50%; /* Vertically center the button */
+            transform: translateY(-50%); /* Compensates for top alignment */   
+        }
+        
+        /* Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #3cb371;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            width: 100%;
+            margin-top: auto; /* Pushes the footer to the bottom */
+        }
+
+        /* Container */
+        .container {
+            background: white;
+            max-width: 900px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centers the text content */
+            margin: 0 auto; /* Horizontally centers the container */
+        }
+
+        /* Heading */
+        h1 {
+            color: #3cb371;
+            margin-bottom: 20px;
+        }
+
+        /* Introduction Section */
+        .introduction {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .person {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e4e0;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centers text inside each person's card */
+        }
+        .person img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .person h2 {
+            color: #3cb371;
+            margin-bottom: 5px;
+        }
+        .person p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .contact-container {
+                padding: 20px;
+            }
+
+            input, textarea {
+                font-size: 0.9rem;
+            }
+
+            button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sliding Menu -->
+    <div class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="recipe1.html">Spaghetti Carbonara</a>
+        <a href="recipe2.html">Chocolate Cake</a>
+        <a href="recipe3.html">Caesar Salad</a>
+        <a href="recipe4.html">Beef Tehari</a>
+        <a href="recipe5.html">Kacchi Biryani</a>
+        <a href="recipe6.html">Shutki Bhuna</a>
+        <a href="recipe7.html">Bhuna Khichuri</a>
+        <a href="recipe8.html">Shorshe Ilish</a>
+        <a href="recipe9.html">Chingri Malai Curry</a>
+        <a href="contact_us.html">Contact Us</a>
+    </div>
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <button class="menu-button" id="menu-button">☰</button>
+        <h1>About Us</h1>
+    </header>
+    
+    <div class="container">
+        <div class="introduction">
+            <!-- Sarang's Section -->
+            <div class="person">
+                <img src="https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-6/405216058_357664980139469_4351741564683002339_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeF_UJ52azjJp1ZiMDVpO2GOLns4_AA0umAuezj8ADS6YJ_bFJ_57Ao0lvSct_ijflixH2CjezfGpMDRUHNUkMLO&_nc_ohc=jqq9HyCP9c0Q7kNvgGovBfK&_nc_zt=23&_nc_ht=scontent.fdac157-1.fna&_nc_gid=ATj26hV-UKJ7zC9OXx6Ie-l&oh=00_AYDz_UI8Hs8sdxHWiNDnj01OHfaDt4hn8iFglDMLmuYQPQ&oe=675F7640" alt="Sarang">
+                <h2>Sarang</h2>
+                <p>Student ID: 0242220005101764</p>
+                <p>Mail: chisim22205101764@diu.edu.bd</p>
+                <p>Hello! I'm Sarang, one of the creators of Bite & Share. I enjoy coding and bringing new ideas to life. This project is a representation of my passion for technology and food!</p>
+            </div>
+            <!-- Asif's Section -->
+            <div class="person">
+                <img src="https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-6/271739879_643159406826990_3673075741875765069_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH-5fIiv4vh-lmzW2EcvKWnr6O9YECy9z6vo71gQLL3PvXkvgQAW7eBrSrYEUeR8RPSH0RY0_TYsPq5QiX92kju&_nc_ohc=TPhYxt7VcW8Q7kNvgFWxQih&_nc_zt=23&_nc_ht=scontent.fdac157-1.fna&_nc_gid=A7diGpSFU3Mo4h1oILYJa9v&oh=00_AYBOZ5-YP3MqoB4rH7Oy1TgBLxcEInIiOxNGHIXII9I-Aw&oe=675F66E2" alt="Asif">
+                <h2>Asif</h2>
+                <p>Student ID: 0242220005101748</p>
+                <p>Mail: asif22205101748@diu.edu.bd</p>
+                <p>Hi! I'm Asif, co-developer of Bite & Share. I love solving complex problems and making interactive web designs. I hope you enjoy our platform!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Bite & Share. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        const menu = document.getElementById('menu');
+        const menuButton = document.getElementById('menu-button');
+        const overlay = document.getElementById('menu-overlay');
+
+        // Open the menu
+        menuButton.addEventListener('click', () => {
+            menu.style.left = '0';
+            overlay.style.display = 'block';
+        });
+
+        // Close the menu when clicking outside
+        overlay.addEventListener('click', () => {
+            menu.style.left = '-250px';
+            overlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

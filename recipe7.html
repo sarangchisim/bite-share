@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhuna Khichuri Recipe</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9f0;
+            color: #2f4f2f;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height of the viewport */
+        }
+
+        /* Header */
+        header {
+            background-color: #3cb371;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .search-bar button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #1d6e3d;
+        }
+
+        /* Sliding Menu */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #2e8b57;
+            overflow-x: hidden;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding-top: 20px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            border-bottom: 1px solid #3cb371;
+        }
+        .menu a:hover {
+            background-color: #3cb371;
+        }
+        .menu-button {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: #2e8b57;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .recipe-container {
+            text-align: center;
+        }
+
+        .recipe-container img {
+            max-width: 80%; /* Limits the image width to 80% of its container */
+            height: auto; /* Ensures the aspect ratio is maintained */
+            max-height: 400px; /* Prevents the image from being too tall */
+            margin: 0 auto 20px auto; /* Centers the image and adds spacing below */
+            border-radius: 10px; /* Adds rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+        }
+
+        .content-box {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .column h2 {
+            margin-top: 0;
+            color: #3cb371;
+            text-align: center;
+        }
+
+        .column ul, .column ol {
+            margin: 0;
+            padding: 0;
+            list-style-position: inside;
+        }
+
+        .column ul li, .column ol li {
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #3cb371;
+            color: white;
+            margin-top: auto; /* Ensures the footer stays at the bottom */
+        }
+
+        /* Review Section */
+        .review-section {
+            margin-top: 20px;
+        }
+        .review-section h2 {
+            text-align: center; /* Center align the heading */
+            color: #3cb371;
+        }
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .review-form input, .review-form textarea, .review-form button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .review-form button {
+            background-color: #3cb371;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .review-form button:hover {
+            background-color: #2e8b57;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: lightgray;
+        }
+        .star.selected {
+            color: gold;
+        }
+
+        /* Spacing adjustments */
+        .review-form button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+        
+<body>
+    <!-- Sliding Menu -->
+    <div class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="recipe1.html">Spaghetti Carbonara</a>
+        <a href="recipe2.html">Chocolate Cake</a>
+        <a href="recipe3.html">Caesar Salad</a>
+        <a href="recipe4.html">Beef Tehari</a>
+        <a href="recipe5.html">Kacchi Biryani</a>
+        <a href="recipe6.html">Shutki Bhuna</a>
+        <a href="recipe7.html">Bhuna Khichuri</a>
+        <a href="recipe8.html">Shorshe Ilish</a>
+        <a href="recipe9.html">Chingri Malai Curry</a>
+        <a href="share.html">Share with us</a>
+        <a href="contact_us.html">Contact us</a>
+        <a href="about.html">About us</a>
+    </div>
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Header -->
+    <header>
+    	<button class="menu-button" id="menu-button">☰</button>
+        <h1>Bhuna Khichuri Recipe</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search recipes...">
+            <button>Search</button>
+        </div>
+    </header>
+    <div class="container">
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="recipe-container">
+            <img src="https://i0.wp.com/cookingcanary.com/wp-content/uploads/2022/02/Bengali-Bhuna-khichuri-served.jpg?fit=600%2C800&ssl=1" alt="Delicious Bhuna Khichuri">
+            
+            <div class="content-box">
+                <div class="column">
+                    <h2>Ingredients</h2>
+                    <ul>
+                        <li>1 cup rice (scented or basmati)</li>
+                        <li>1/2 cup split yellow lentils (moong dal)</li>
+                        <li>2 medium onions (sliced)</li>
+                        <li>2 green chilies (slit)</li>
+                        <li>1 teaspoon cumin seeds</li>
+                        <li>1 teaspoon turmeric powder</li>
+                        <li>1 teaspoon garam masala powder</li>
+                        <li>1/2 cup mustard oil</li>
+                        <li>Salt to taste</li>
+                        <li>Water as needed</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h2>Instructions</h2>
+                    <ol>
+                        <li>Wash the rice and lentils together and soak for 10-15 minutes.</li>
+                        <li>Heat mustard oil in a pot. Add cumin seeds and let them splutter.</li>
+                        <li>Add the sliced onions and green chilies, fry until the onions are golden brown.</li>
+                        <li>Add turmeric powder, garam masala powder, and salt. Stir well.</li>
+                        <li>Add the soaked rice and lentils to the pot and fry for 3-4 minutes.</li>
+                        <li>Add enough water (about 2 cups) and bring to a boil.</li>
+                        <li>Cover and cook on low heat until the rice and lentils are tender and the water is absorbed.</li>
+                        <li>Serve hot with your choice of meat or vegetable curry.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Review Section -->
+        <div class="review-section">
+            <h2>Leave a Review</h2>
+            <form class="review-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <div class="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <textarea name="review" placeholder="Your Review" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!---....footer....---->
+    <footer>
+        <p>&copy; 2024 Bite & Share. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const menuButton = document.getElementById('menu-button');
+        const overlay = document.getElementById('menu-overlay');
+        const stars = document.querySelectorAll('.star');
+
+        // Open the menu
+        menuButton.addEventListener('click', () => {
+            menu.style.left = '0';
+            overlay.style.display = 'block';
+        });
+
+        // Close the menu when clicking outside
+        overlay.addEventListener('click', () => {
+            menu.style.left = '-250px';
+            overlay.style.display = 'none';
+        });
+
+        // Star rating interaction
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+        });
+
+        // Prevent form submission for demonstration
+        const reviewForm = document.querySelector('.review-form');
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your review!');
+            reviewForm.reset();
+            stars.forEach(s => s.classList.remove('selected'));
+        });
+    </script>
+</body>
+</html>

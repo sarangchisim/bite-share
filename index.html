@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bite & Share</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9f0;
+            color: #2f4f2f;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height of the viewport */
+        }
+
+        /* Header */
+        header {
+            background-color: #3cb371;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header img {
+            max-height: 50px; /* Ensures the logo fits within the header */
+            width: auto;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .search-bar button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #1d6e3d;
+        }
+
+        /* Sliding Menu */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #2e8b57;
+            overflow-x: hidden;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding-top: 20px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            border-bottom: 1px solid #3cb371;
+        }
+        .menu a:hover {
+            background-color: #3cb371;
+        }
+        .menu-button {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: #2e8b57;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+        }
+        .welcome-section h2 {
+            color: #3cb371;
+            margin-bottom: 10px;
+        }
+        .welcome-section p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1; /* Push the footer to the bottom */
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .recipe-card {
+            background: white;
+            border: 1px solid #e0e4e0;
+            border-radius: 10px;
+            width: calc(33% - 20px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+        .recipe-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .recipe-card h2 {
+            color: #3cb371;
+            margin: 10px 0;
+        }
+        .recipe-card a {
+            text-decoration: none;
+            color: white;
+            background: #3cb371;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .recipe-card a:hover {
+            background: #2e8b57;
+        }
+        
+        /* Partners Section */
+        .partners-section {
+            margin: 40px auto;
+            width: auto;
+            max-width: 100vw; /* Prevent the section from exceeding the browser window width */
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; /* Hide any overflow content */
+        }
+        .partners-section h2 {
+            text-align: center;
+            color: #3cb371;
+            margin-bottom: 20px;
+            /*margin-top: 0; /* Align better with buttons */
+        }
+        .partners-container-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center; /* Align arrows and container vertically */
+            width: 100%;
+            overflow: hidden; /* Prevent horizontal overflow */
+        }
+        
+        .partners-container {
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling for partner cards */
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 10px 0px;
+            flex-grow: 1; /* Ensure container takes available space */ */
+        }
+        .partner-card {
+            flex: 0 0 auto; /* Prevent cards from shrinking */
+            background: #f9f9f9;
+            border: 1px solid #e0e4e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            min-width: 250px; /* smaller card size */
+            max-width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .partner-card img {
+            max-width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .partner-card h3 {
+            color: #3cb371;
+            margin: 10px 0 5px;
+        }
+        .partner-card p {
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.4;
+        }
+        .partners-section button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #3cb371;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            z-index: 10; /* Ensure buttons appear above the cards */
+        }
+        .partners-section button:hover {
+            background-color: #2e8b57;
+        }
+        .partners-section .left-arrow {
+            left: 10px;
+        }
+        .partners-section .right-arrow {
+            right: 25px;
+        }
+        
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #3cb371;
+            color: white;
+        }
+
+        /* Overlay for main content when menu is open */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sliding Menu -->
+    <div class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="recipe1.html">Spaghetti Carbonara</a>
+        <a href="recipe2.html">Chocolate Cake</a>
+        <a href="recipe3.html">Caesar Salad</a>
+        <a href="recipe4.html">Beef Tehari</a>
+        <a href="recipe5.html">Kacchi Biryani</a>
+        <a href="recipe6.html">Shutki Bhuna</a>
+        <a href="recipe7.html">Bhuna Khichuri</a>
+        <a href="recipe8.html">Shorshe Ilish</a>
+        <a href="recipe9.html">Chingri Malai Curry</a>
+        <a href="share.html">Share with us</a>
+        <a href="contact_us.html">Contact us</a>
+        <a href="about.html">About us</a>
+    </div>
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <button class="menu-button" id="menu-button">☰</button>
+        <img src="logo.png" alt="Bite & Share Logo"> <!-- Replace with your logo file -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search recipes...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <h2>Welcome to Bite & Share!</h2>
+        <p>
+            Discover a world of delicious recipes from across the globe, curated just for you. 
+            Bite & Share is your ultimate destination to explore, learn, and enjoy culinary delights. 
+            Share your favorite recipes with our community and make this platform your own kitchen companion.
+        </p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Recipe Cards -->
+        <div class="recipe-card">
+            <img src="https://www.allrecipes.com/thmb/QtmdHdH04CHgBbjUsISCm_RLTM0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg" alt="Spaghetti Carbonara">
+            <h2>Spaghetti Carbonara</h2>
+            <a href="recipe1.html">View Recipe</a>
+        </div>
+        <div class="recipe-card">
+            <img src="https://www.thebakerchick.com/wp-content/uploads/2013/06/choccake2-682x1024.jpg" alt="Chocolate Cake">
+            <h2>Chocolate Cake</h2>
+            <a href="recipe2.html">View Recipe</a>
+        </div>
+        <div class="recipe-card">
+            <img src="https://cookingwithayeh.com/wp-content/uploads/2023/10/Healthy-Caesar-Salad-Without-Anchovies-1.jpg" alt="Caesar Salad">
+            <h2>Caesar Salad</h2>
+            <a href="recipe3.html">View Recipe</a>
+        </div>
+    </div>
+    
+    <!-- Partners Section -->
+    <div class="partners-section">
+        <h2>Our Partners</h2>
+        <div class="partners-container-wrapper">
+        <button class="left-arrow">&lt;</button>
+        <div class="partners-container" id="partners-container">
+            <!-- Partner 1 -->
+            <div class="partner-card">
+                <img src="https://brandslogos.com/wp-content/uploads/images/large/tesla-logo-black-and-white.png" alt="Tesla Logo">
+                <h3>Tesla</h3>
+                <p>Innovating the future with electric vehicles and sustainable energy solutions.</p>
+            </div>
+            <!-- Partner 2 -->
+            <div class="partner-card">
+                <img src="https://storage.googleapis.com/gd-prod/images/a910d418-7123-4bc4-aa3b-ef7e25e74ae6.60c498c559810aa0.webp" alt="Google Logo">
+                <h3>Google</h3>
+                <p>Empowering the world with advanced search technology and digital services.</p>
+            </div>
+            <!-- Partner 3 -->
+            <div class="partner-card">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/019/136/319/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg" alt="Amazon Logo">
+                <h3>Amazon</h3>
+                <p>Revolutionizing e-commerce and cloud computing globally.</p>
+            </div>
+            <!-- Partner 4 -->
+            <div class="partner-card">
+                <img src="https://cdn.freelogovectors.net/wp-content/uploads/2023/02/daffodil-international-university-logo-freelogovectors.net_.png" alt="Daffodil Logo">
+                <h3>Daffodil International University</h3>
+                <p>Pioneering education and technological innovations in diverse industries.</p>
+            </div>
+            <!-- Partner 5 -->
+            <div class="partner-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6RACuKQ8sJxNXI17b6tLyd4vmhraPT5OYmw&s" alt="Apple Logo">
+                <h3>Apple</h3>
+                <p>Creating cutting-edge technology with a focus on design and user experience.</p>
+            </div>
+            <!-- Partner 6 -->
+            <div class="partner-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCUj6clNyezlo-4Ig5lA8ptcyI5tj-ByMenw&s" alt="Meta Logo">
+                <h3>Meta</h3>
+                <p>Connecting the world through social media and virtual reality innovation.</p>
+            </div>
+        </div>
+        <button class="right-arrow">&gt;</button>
+       </div>
+    </div>
+    
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Bite & Share. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const menuButton = document.getElementById('menu-button');
+        const overlay = document.getElementById('menu-overlay');
+        const partnersContainer = document.getElementById('partners-container');
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+
+        // Open the menu
+        menuButton.addEventListener('click', () => {
+            menu.style.left = '0';
+            overlay.style.display = 'block';
+        });
+
+        // Close the menu when clicking outside
+        overlay.addEventListener('click', () => {
+            menu.style.left = '-250px';
+            overlay.style.display = 'none';
+        });
+
+        // Scroll partners section
+        leftArrow.addEventListener('click', () => {
+            partnersContainer.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+        rightArrow.addEventListener('click', () => {
+            partnersContainer.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

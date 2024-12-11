@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share with us</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9f0;
+            color: #2f4f2f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #3cb371;
+            color: white;
+            padding: 25px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        header h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        /* Sliding Menu */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #2e8b57;
+            overflow-x: hidden;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding-top: 20px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            border-bottom: 1px solid #3cb371;
+        }
+
+        .menu a:hover {
+            background-color: #3cb371;
+        }
+
+        .menu-button {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background-color: #2e8b57;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h1 {
+            color: #3cb371;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e4e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            background-color: #3cb371;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2e8b57;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #3cb371;
+            color: white;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            input, textarea {
+                font-size: 0.9rem;
+            }
+
+            button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sliding Menu -->
+    <div class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="recipe1.html">Spaghetti Carbonara</a>
+        <a href="recipe2.html">Chocolate Cake</a>
+        <a href="recipe3.html">Caesar Salad</a>
+        <a href="recipe4.html">Beef Tehari</a>
+        <a href="recipe5.html">Kacchi Biryani</a>
+        <a href="recipe6.html">Shutki Bhuna</a>
+        <a href="recipe7.html">Bhuna Khichuri</a>
+        <a href="recipe8.html">Shorshe Ilish</a>
+        <a href="recipe9.html">Chingri Malai Curry</a>
+        <a href="share.html">Share with us</a>
+        <a href="contact_us.html">Contact us</a>
+        <a href="about.html">About us</a>
+    </div>
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <button class="menu-button" id="menu-button">☰</button>
+        <h1>Share with us</h1>
+    </header>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <h1>Share Your Recipe</h1>
+        <form id="recipe-form" method="GET" action="mailto:sarang.chizim@gmail.com" enctype="text/plain">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="+880 18 111 22 333" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="your@mail.com" required>
+
+            <label for="recipe-name">Recipe Name:</label>
+            <input type="text" id="recipe-name" name="recipe-name" placeholder="Recipe Name" required>
+
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" name="ingredients" placeholder="List of Ingredients" required></textarea>
+
+            <label for="instructions">Instructions:</label>
+            <textarea id="instructions" name="instructions" placeholder="Preparation Instructions" required></textarea>
+
+            <label for="image">Upload Picture (Optional):</label>
+            <input type="file" id="image" name="image" accept="image/*">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Bite & Share. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const menuButton = document.getElementById('menu-button');
+        const overlay = document.getElementById('menu-overlay');
+        const recipeForm = document.getElementById('recipe-form');
+
+        // Open the menu
+        menuButton.addEventListener('click', () => {
+            menu.style.left = '0';
+            overlay.style.display = 'block';
+        });
+
+        // Close the menu when clicking outside
+        overlay.addEventListener('click', () => {
+            menu.style.left = '-250px';
+            overlay.style.display = 'none';
+        });
+
+        // Form submission validation
+        recipeForm.addEventListener('submit', (e) => {
+            const inputs = Array.from(recipeForm.querySelectorAll('input, textarea')).filter(input => input.required);
+            const isValid = inputs.every(input => input.value.trim() !== '');
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill out all required fields.');
+            }
+        });
+    </script>
+</body>
+</html>
